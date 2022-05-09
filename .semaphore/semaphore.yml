@@ -12,6 +12,7 @@ blocks:
           commands:
             - checkout
             - 'echo foo${envvar_hw1}bar'
+            - echo version2
       env_vars:
         - name: envvar_hw1
           value: value_hw1
