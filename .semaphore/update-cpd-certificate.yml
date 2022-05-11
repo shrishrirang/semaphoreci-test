@@ -1,0 +1,34 @@
+version: v1.0
+name: Update CPD Certificate in S3
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Block-hw1
+    task:
+      jobs:
+        - name: Job-hw1
+          commands:
+            - checkout
+            - 'echo foo${envvar_hw1}bar'
+      env_vars:
+        - name: envvar_hw1
+          value: value_hw1
+      prologue:
+        commands:
+          - echo prologue-hw
+          - 'echo foo${envvar_hw1}bar'
+      epilogue:
+        always:
+          commands:
+            - echo epilogue-hw
+            - 'echo foo${envvar_hw1}bar'
+        on_pass:
+          commands:
+            - echo job-passed-hw
+            - 'echo foo${envvar_hw1}bar'
+        on_fail:
+          commands:
+            - echo job-passed-hw
+            - 'echo foo${envvar_hw1}bar'
